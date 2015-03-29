@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Phaser - Making your first game, part 2</title>
+        <script type="text/javascript" src="lib/phaser.min.js"></script>
+        <script type="text/javascript" src="lib/util.js"></script>
+        <style type="text/css">
+            body{
+                margin: 0;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <script type="text/javascript">
+            var game = new Phaser.Game(640, 960, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+            var graphics;
+            
+            var map;
+            var layer_bg;
+            var hud_top;
+            var hud_bottom;
+            
+            
+            function preload(){
+                game.load.image('bg', 'assets/imgs/default/bg.png');
+                game.load.image('hud_top', 'assets/imgs/default/hud/top.png');
+            }
+            
+            function create() {
+               mouse_start_x = null;  
+               mouse_start_y = null;  
+           
+               hud_top = game.add.sprite(0, 0, 'hud_top');
+               graphics = game.add.graphics(0, 0);
+               
+            }
+           
+           function update(){
+               findButtonRegion(game);
+
+            }
+            
+        </script>
+    </body>
+</html>

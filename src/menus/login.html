@@ -1,0 +1,55 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Phaser - Making your first game, part 1</title>
+	<link rel="stylesheet" href="../../assets/stylesheets/app.css" type="text/css" media="all">
+	<script type="text/javascript" src="../../lib/phaser.min.js"></script>
+	<script type="text/javascript" src="../../lib/util.js"></script>
+	<script type="text/javascript" src="../../lib/jquery-1.11.2.min.js"></script>
+
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+var game = new Phaser.Game(640, 960, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+
+function preload() {
+    game.load.image('login', '../../assets/imgs/default/login/login.png');
+}
+
+function create() {
+    game.add.sprite(0, 0, 'login');
+    graphics = game.add.graphics(0, 0);
+    
+}
+
+function update() {
+    if (game.input.mousePointer.isDown) {
+        mouseX = game.input.mousePointer.x;
+        mouseY = game.input.mousePointer.y;//alert('detect')alert('detect')
+        //login button
+        if ((mouseX > 140 && mouseX < 500) && (mouseY > 618 && mouseY < 695)) {
+            $('form').submit(); //alert('detect')
+        }
+    }
+}
+    
+
+
+
+
+
+</script>
+<form id='login_form'>
+    <input id='un' name='user_name'>
+    <input id='pass' type='password' name='password'>
+</form>
+</body>
+</html>

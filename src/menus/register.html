@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Phaser - Register for an account</title>
+        <script type="text/javascript" src="../../lib/phaser.min.js"></script>
+        <script type="text/javascript" src="../../lib/util.js"></script>
+        <style type="text/css">
+            body{
+                margin: 0;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <script type="text/javascript">
+        
+         var game = new Phaser.Game(640, 960, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+           var graphics;
+           var mouseX;
+           var mouseY;
+           
+            function preload(){
+                game.load.image('register', '../../assets/imgs/default/login/register.png');
+                game.load.image('submit', '../../assets/imgs/default/login/buttons/submit.png')
+            }
+            
+            function create() {
+                 hud_top = game.add.sprite(0, 0, 'register');
+                 graphics = game.add.graphics(0, 0);
+                 clicked_submit = game.add.sprite(-1000,-1000, 'submit')
+               
+               
+            }
+           
+           function update(){
+               
+               if(game.input.mousePointer.isDown)
+               {
+                   var mouseX = game.input.mousePointer.x
+                   var mouseY = game.input.mousePointer.y
+                   console.log(mouseY.toString());
+                    if(mouseX >= 135 && mouseX <= 510 && mouseY >= 810 && mouseY <= 900)
+                   {
+                       console.log("submit");
+                       clicked_submit.x=135
+                       clicked_submit.y=810
+                       
+                   }
+                   else
+                   {
+                      clicked_submit.x=-1000
+                      clicked_submit.y=-1000
+                   }
+               }
+                   else
+                   {
+                      clicked_submit.x=-1000
+                      clicked_submit.y=-1000
+                   }
+                  
+                   if(mouseX >= 100 && mouseX <= 540 && mouseY >= 342 && mouseY <= 400)
+                   {
+                       console.log("email");
+                   }
+                   
+                    if(mouseX >= 100 && mouseX <= 540 && mouseY >= 468 && mouseY <= 530)
+                    {
+                        console.log("username");
+                    }
+                    if(mouseX >= 100 && mouseX <= 540 && mouseY >= 593 && mouseY <= 652)
+                    {
+                        console.log("password");
+                     }
+                     if(mouseX >= 100 && mouseX <= 540 && mouseY >= 716 && mouseY <= 778)
+                     {
+                         console.log("confirm password");
+                     }
+                     
+               }
+    
+        </script>
+    </body>
+</html>

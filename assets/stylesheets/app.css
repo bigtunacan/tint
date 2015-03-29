@@ -1,0 +1,25 @@
+#login_form {
+    position: absolute;
+}
+
+#un{
+    position: absolute;
+    top: 395px;
+    height: 37px;
+    left: 115px;
+    width: 405px;
+    font-size: 33px;
+    background-color: rgba(255, 251, 135, 1);
+    color: #5fba3d;
+}
+
+#pass{
+    position: absolute;
+    top: 527px;
+    height: 37px;
+    left: 115px;
+    width: 405px;
+    font-size: 33px;
+    background-color: rgba(255, 251, 135, 1);
+    color: #5fba3d;
+}
