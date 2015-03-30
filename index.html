@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <title>Phaser - Making your first game, part 2</title>
         <script type="text/javascript" src="lib/phaser.min.js"></script>
+        <script type="text/javascript" src="lib/util.js"></script>
         <style type="text/css">
             body{
                 margin: 0;
@@ -53,7 +54,10 @@
                map.addTilesetImage("tiles", "tiles_img");
 
                bg_map_layer = map.createLayer("Background")//.resizeWorld();
-               bg_map_layer.y = 200;
+               bg_map_layer.fixedToCamera = false;
+               
+               bg_map_y = scr_height/2 - bg_map_layer.height/2 
+               bg_map_layer.y = 100;
                
                hud_top = game.add.sprite(0, 0, 'hud_top');
                hud_bot = game.add.sprite(0, 0, 'hud_bot');
@@ -79,6 +83,16 @@
             }
            
            function update(){
+               //findButtonRegion(game);
+              if(game.input.mousePointer.isDown){
+                  foobar = bg_map_layer.getTiles( game.input.mousePointer.x, game.input.mousePointer.y, 10, 10); 
+                  if(foobar){
+                      if(foobar[0]){
+                          foobar[0].alpha = 0;
+                          console.log("tile found?");
+                      }
+                  }
+              }
 //                if(game.input.mousePointer.isDown){
 //                    if(start_x === null){
 //                       start_x = game.input.mousePointer.x;

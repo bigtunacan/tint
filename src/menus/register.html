@@ -3,8 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <title>Phaser - Register for an account</title>
+        <link rel="stylesheet" href="../../assets/stylesheets/app.css" type="text/css" media="all">
         <script type="text/javascript" src="../../lib/phaser.min.js"></script>
         <script type="text/javascript" src="../../lib/util.js"></script>
+        <script src="../../lib/jquery-1.11.2.min.js"></script>
         <style type="text/css">
             body{
                 margin: 0;
@@ -32,53 +34,53 @@
                
                
             }
-           
+          var submit_down = false;
            function update(){
-               
+               //findButtonRegion(game);
                if(game.input.mousePointer.isDown)
                {
                    var mouseX = game.input.mousePointer.x
                    var mouseY = game.input.mousePointer.y
                    console.log(mouseY.toString());
-                    if(mouseX >= 135 && mouseX <= 510 && mouseY >= 810 && mouseY <= 900)
+                   if(mouseX >= 135 && mouseX <= 510 && mouseY >= 810 && mouseY <= 900)
                    {
-                       console.log("submit");
+                        console.log("submit");
+                        // $.post('https://tint-sundus2y.c9.io/users/', $(this).serialize(), function(){
+                        //     alert('user account created');
+                        // });
                        clicked_submit.x=135
                        clicked_submit.y=810
-                       
+                       submit_down = true;
                    }
                    else
                    {
-                      clicked_submit.x=-1000
-                      clicked_submit.y=-1000
+                       moveButtonOffScreen(clicked_submit);
+                       submit_down = false;
                    }
                }
-                   else
-                   {
-                      clicked_submit.x=-1000
-                      clicked_submit.y=-1000
+               else
+               {
+                   if(submit_down) {
+                      window.location.assign('start.html')
                    }
-                  
-                   if(mouseX >= 100 && mouseX <= 540 && mouseY >= 342 && mouseY <= 400)
-                   {
-                       console.log("email");
-                   }
-                   
-                    if(mouseX >= 100 && mouseX <= 540 && mouseY >= 468 && mouseY <= 530)
-                    {
-                        console.log("username");
-                    }
-                    if(mouseX >= 100 && mouseX <= 540 && mouseY >= 593 && mouseY <= 652)
-                    {
-                        console.log("password");
-                     }
-                     if(mouseX >= 100 && mouseX <= 540 && mouseY >= 716 && mouseY <= 778)
-                     {
-                         console.log("confirm password");
-                     }
-                     
+                   moveButtonOffScreen(clicked_submit);
+                   submit_down = false;
                }
+           }
     
         </script>
+        <!--<form accept-charset="UTF-8" action="https://tint-sundus2y.c9.io/users/" id="new_user" method="post">-->
+        <!--	<input name="authenticity_token" type="hidden" value="rPxPw5asM/MsT0/KfCvzniTXbhK6mv/rWifa7jVgDFc=">-->
+        <!--	<input id="regem" name="user[email]" type="text">-->
+        <!--	<input id="regun" name="user[user_name]" type="text">-->
+        <!--	<input id="repass" type='password' name="user[password]" type="text">-->
+        <!--	<input id='conf' type='password' name='Confirm Password'>-->
+        <!--</form>-->
+        <form id='login_form' action='https://tint-sundus2y.c9.io/users/' method='post'>
+            <input id='regem' name='E-Mail'>
+            <input id='regun' name='Username'>
+            <input id='repass' type='password' name='Password'>
+            <input id='conf' type='password' name='Confirm Password'>
+        </form>
     </body>
 </html>

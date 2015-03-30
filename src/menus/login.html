@@ -22,30 +22,60 @@ var game = new Phaser.Game(640, 960, Phaser.AUTO, '', { preload: preload, create
 
 function preload() {
     game.load.image('login', '../../assets/imgs/default/login/login.png');
+    game.load.image('login_button', '../../assets/imgs/default/login/buttons/login.png')
+    game.load.image('register_button', '../../assets/imgs/default/login/buttons/register.png')
 }
 
 function create() {
     game.add.sprite(0, 0, 'login');
+    register_button = game.add.sprite(-1000,-1000, 'register_button')
+    login_button = game.add.sprite(-1000,-1000, 'login_button')
     graphics = game.add.graphics(0, 0);
     
 }
-
+var login_down = false;
+var register_down = false;
 function update() {
+    //findButtonRegion(game);
     if (game.input.mousePointer.isDown) {
         mouseX = game.input.mousePointer.x;
         mouseY = game.input.mousePointer.y;//alert('detect')alert('detect')
         //login button
         if ((mouseX > 140 && mouseX < 500) && (mouseY > 618 && mouseY < 695)) {
-            $('form').submit(); //alert('detect')
+            login_button.x=132
+            login_button.y=610
+            login_down = true;
+            //$('form').submit(); //alert('detect')
         }
+        else if (mouseX >= 138 && mouseX <= 502 && mouseY >= 800 && mouseY <= 885)
+        {
+            console.log("moose")
+            register_button.x=134
+            register_button.y=800
+            register_down = true;
+        }
+        else {
+            moveButtonOffScreen(login_button)
+            moveButtonOffScreen(register_button)
+            login_down = false;
+            register_down = false;
+        }
+    }else {
+        if(login_down) {
+            window.location.assign('../../index.html')
+        }
+        if(register_down) {
+            window.location.assign('register.html')
+        }
+        moveButtonOffScreen(login_button)
+        moveButtonOffScreen(register_button)
+        login_down = false;
+        register_down = false;
     }
+
 }
     
-
-
-
-
-
+    
 </script>
 <form id='login_form'>
     <input id='un' name='user_name'>

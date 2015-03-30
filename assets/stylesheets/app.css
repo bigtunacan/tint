@@ -10,7 +10,7 @@
     width: 405px;
     font-size: 33px;
     background-color: rgba(255, 251, 135, 1);
-    color: #5fba3d;
+    color: #000000;
 }
 
 #pass{
@@ -21,5 +21,50 @@
     width: 405px;
     font-size: 33px;
     background-color: rgba(255, 251, 135, 1);
-    color: #5fba3d;
+    color: #000000;
+}
+
+#regem {
+    position: absolute;
+    top: 350px;
+    height: 37px;
+    left: 115px;
+    width: 400px;
+    font-size: 33px;
+    background-color: rgba(255, 251, 135, 1);
+    color: #000000;
+
+}
+
+#regun {
+    position: absolute;
+    top: 478px;
+    height: 37px;
+    left: 115px;
+    width: 400px;
+    font-size: 33px;
+    background-color: rgba(255, 251, 135, 1);
+    color: #000000;
+}
+
+#repass {
+    position: absolute;
+    top: 600px;
+    height: 37px;
+    left: 115px;
+    width: 400px;
+    font-size: 33px;
+    background-color: rgba(255, 251, 135, 1);
+    color: #000000;
+}
+
+#conf {
+    position: absolute;
+    top: 727px;
+    height: 37px;
+    left: 115px;
+    width: 400px;
+    font-size: 33px;
+    background-color: rgba(255, 251, 135, 1);
+    color: #000000;
 }

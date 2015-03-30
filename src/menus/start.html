@@ -25,44 +25,84 @@
             function preload(){
                 game.load.image('start', '../../assets/imgs/default/login/start.png')
                 game.load.image('login_to_play', '../../assets/imgs/default/login/buttons/login_to_play.png')
+                game.load.image('how_to_play', '../../assets/imgs/default/login/buttons/how_to_play.png')
+                game.load.image('login_email', '../../assets/imgs/default/login/buttons/login_with_email.png')
             }
             
             function create() {
                 game.add.sprite(0, 0, 'start');
                 graphics = game.add.graphics(0, 0)
                 login_to_play = game.add.sprite(-1000,-1000,'login_to_play');
+                how_to_play = game.add.sprite(-1000,-1000, 'how_to_play');
+                login_email = game.add.sprite(-1000,-1000, 'login_email')
             }
-           
+          
+           var login_down = false;
+           var h2p_down = false;
+           var login_email_down = false;
            function update(){
-             
+                //findButtonRegion(game)
                if (game.input.mousePointer.isDown) {
                     mouseX = game.input.mousePointer.x;
                     mouseY = game.input.mousePointer.y;
                     console.log(mouseX.toString())
+                    
+                    // login to play button clicked
                     if(mouseX >= 135 && mouseX <= 505 && mouseY >= 424 && mouseY <= 511)
                     {
                         login_to_play.x=134
                         login_to_play.y=420
-                        console.log("login to play")
+                       // console.log("login to play")
+                        login_down = true;
                     }
-                    //login with facebook
+                    //login with facebook button clicked
                     else if (mouseX >= 98 && mouseX <= 540 && mouseY >= 576 && mouseY <= 636)
                     {
                         game.input.mousePointer.isDown = false;
                         $.fn.checkFBLogin();
                     }
+                    //how to play button clicked
+                    else if (mouseX >= 137 && mouseX <= 498 && mouseY >= 828 && mouseY <= 913)
+                    {
+                        console.log("Was this clicked?");
+                        how_to_play.x=134
+                        how_to_play.y=824
+                        h2p_down = true;
+                    }
+                    //login with email button clicked
+                    else if (mouseX >= 90 && mouseX <= 547 && mouseY >= 705 && mouseY <= 766)
+                    {
+                        console.log("clicked")
+                        login_email.x=90
+                        login_email.y=705
+                        login_email_down = true;
+                    }
                     else
                     {
-                        login_to_play.x=-1000
-                        login_to_play.y=-1000
+                       moveButtonOffScreen(login_to_play);
+                       moveButtonOffScreen(how_to_play);
+                       moveButtonOffScreen(login_email);
+                       login_down = false;
+                       h2p_down = false;
+                       login_email = false;
                     }
                }
                else
                {
-                   login_to_play.x=-1000
-                    login_to_play.y=-1000
+                   if(login_down||login_email_down){ //login button was clicked
+                      window.location.assign('login.html')
+
+                   }
+                       
+                   
+                   moveButtonOffScreen(login_to_play);
+                   moveButtonOffScreen(how_to_play);
+                   moveButtonOffScreen(login_email)
+                   login_down = false;
+                   h2p_down = false;
+                   login_email_down = false;
                }
-               }
+           }
             
         </script>
     </body>
