@@ -79,7 +79,6 @@
 //               play_button = game.add.sprite(-1000, -1000, 'play')
 
                // Temporary code for testing tilemaps
-               
                arr_touched_tiles = [];
             }
            
@@ -88,7 +87,6 @@
 //              foobar[0].alpha = 0.5;
 //              foobar[0].rotation = 40;
 
-//            findButtonRegion(game);
               if(game.input.mousePointer.isDown){
                   downer = {
                       "mouseX": game.input.mousePointer.x,
@@ -99,28 +97,9 @@
               }else{
                  if(downer.dirty === "true") {
                      downer.dirty = "false";
-
-//                     if ((mouseX > 867 && mouseX < 74) && (mouseY > 77 && mouseY < 72))
-//                     {
-//                         play_button.x=867
-//                         play_button.y=77
-//                     }
-//                     arr_touched_tiles = _.union(arr_touched_tiles, bg_map_layer.getTiles( 300,300, 100, 100)); 
-//                     arr_touched_tiles = bg_map_layer.getTiles( game.input.mousePointer.x, game.input.mousePointer.y, 10, 10); 
-                     bg_map_layer.getTiles( game.input.mousePointer.x, game.input.mousePointer.y, 10, 10)[0].alpha = 0.5;
-                     bg_map_layer.getTiles( game.input.mousePointer.x, game.input.mousePointer.y, 10, 10)[0].rotation = 40;
-                     
-//                     _.each(bg_map_layer.getTiles( game.input.mousePointer.x, game.input.mousePointer.y, 10, 10), function(tile){
-//                         tile.alpha = 0.0;
-//                         tile.rotation = 40;
-//                     });
+                     arr_touched_tiles = bg_map_layer.getTiles( game.input.mousePointer.x, game.input.mousePointer.y, 10, 10); 
                  }
               }
-           
-//              for(var i = 0; i < arr_touched_tiles.length; i++){
-//                  arr_touched_tiles[i].alpha = 0.0;
-//                  arr_touched_tiles[i].rotation = 40;
-//              } 
               
             }
             
