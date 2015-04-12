@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <title>Phaser - Making your first game, part 2</title>
         <script type="text/javascript" src="lib/phaser.min.js"></script>
+        <script type="text/javascript" src="lib/underscore.min.js"></script>
         <script type="text/javascript" src="lib/util.js"></script>
         <style type="text/css">
             body{
@@ -16,7 +17,7 @@
         <script type="text/javascript">
             var scr_width = 640;
             var scr_height = 960;
-            var game = new Phaser.Game(scr_width, scr_height, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+            var game = new Phaser.Game(scr_width, scr_height, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
             var map;
             
             var layer_bg;
@@ -30,6 +31,9 @@
             
             var sizer_rect; // Temporary variable for defining collision zones
             
+            var arr_touched_tiles = [];
+            var downer = { "dirty": "false" };
+
             function preload(){
                 game.load.image('bg', 'assets/imgs/default/bg.png');
                 game.load.image('hud_top', 'assets/imgs/default/hud/top.png');
@@ -38,7 +42,8 @@
                 
                 game.load.tilemap("map", "assets/imgs/default/map.json", null, Phaser.Tilemap.TILED_JSON);
                 game.load.image("tiles_img", "assets/imgs/default/tiles.png");
-//game.load.image("Tiles", "castle_0.png");
+//                game.load.image('play', '../../assets/imgs/default/hud/buttons2/play.png')
+
             }
             
             function create() {
@@ -55,60 +60,78 @@
 
                bg_map_layer = map.createLayer("Background")//.resizeWorld();
                bg_map_layer.fixedToCamera = false;
-               
-               bg_map_y = scr_height/2 - bg_map_layer.height/2 
                bg_map_layer.y = 100;
+              
+              // BEGIN TEST CODE 
+               //symbols_map_layer = map.createLayer("Symbols")//.resizeWorld();
+               //symbols_map_layer.fixedToCamera = false;
+               //symbols_map_layer.y = 100;
                
+               //footile = new Phaser.Tile(symbols_map_layer, 2, 100, 100, 32, 32); 
+               map.putTile(null, 300, 300, bg_map_layer);
+               map.putTile(4, 300, 300, bg_map_layer);
+              // END TEST CODE 
+              
                hud_top = game.add.sprite(0, 0, 'hud_top');
                hud_bot = game.add.sprite(0, 0, 'hud_bot');
                hud_bot.y = scr_height - hud_bot.height;
                
-               //var cloud_a = game.add.sprite(100, 100, 'tiles_atlas', 'Cloud/Cloud_A.png');
+//               play_button = game.add.sprite(-1000, -1000, 'play')
+
+               // Temporary code for testing tilemaps
                
-               // TODO: Replace this with a real tilemap
-//               for(var i = 0; i < 20; i++){
-//                   for(var j = 0; j < 20; j++){
-//                       bg1 = game.add.sprite((i*32), 100 + (j*32), 'bg');
-//                   }
-//               }
-               
-               
-//                game.stage.backgroundColor = '#FF0000'
-//                
-//                // Setup the background tile layer
-//                map = game.add.tilemap('playfield');
-//                map.addTilesetImage('playfield', 'bg');
-//                
-                //layer_bg = map.create('playfield', 20, 20, 32, 32);
+               arr_touched_tiles = [];
             }
            
            function update(){
-               //findButtonRegion(game);
+//              foobar = bg_map_layer.getTiles( 14,113, 1, 1); 
+//              foobar[0].alpha = 0.5;
+//              foobar[0].rotation = 40;
+
+//            findButtonRegion(game);
               if(game.input.mousePointer.isDown){
-                  foobar = bg_map_layer.getTiles( game.input.mousePointer.x, game.input.mousePointer.y, 10, 10); 
-                  if(foobar){
-                      if(foobar[0]){
-                          foobar[0].alpha = 0;
-                          console.log("tile found?");
-                      }
+                  downer = {
+                      "mouseX": game.input.mousePointer.x,
+                      "mouseY": game.input.mousePointer.y,
+                      "mouseState": "down",
+                      "dirty": "true"
                   }
+              }else{
+                 if(downer.dirty === "true") {
+                     downer.dirty = "false";
+
+//                     if ((mouseX > 867 && mouseX < 74) && (mouseY > 77 && mouseY < 72))
+//                     {
+//                         play_button.x=867
+//                         play_button.y=77
+//                     }
+//                     arr_touched_tiles = _.union(arr_touched_tiles, bg_map_layer.getTiles( 300,300, 100, 100)); 
+//                     arr_touched_tiles = bg_map_layer.getTiles( game.input.mousePointer.x, game.input.mousePointer.y, 10, 10); 
+                     bg_map_layer.getTiles( game.input.mousePointer.x, game.input.mousePointer.y, 10, 10)[0].alpha = 0.5;
+                     bg_map_layer.getTiles( game.input.mousePointer.x, game.input.mousePointer.y, 10, 10)[0].rotation = 40;
+                     
+//                     _.each(bg_map_layer.getTiles( game.input.mousePointer.x, game.input.mousePointer.y, 10, 10), function(tile){
+//                         tile.alpha = 0.0;
+//                         tile.rotation = 40;
+//                     });
+                 }
               }
-//                if(game.input.mousePointer.isDown){
-//                    if(start_x === null){
-//                       start_x = game.input.mousePointer.x;
-//                       start_y = game.input.mousePointer.y;
-//                    }
-//                    
-//                    var width  = start_x - game.input.mousePointer.x;
-//                    var height = start_y - game.input.mousePointer.y;
-//                    
-//                    graphics.beginFill(0x00FF00, 1);
-//                    graphics.drawRect(start_x, start_y, width, height);
-//                    graphics.endFill();
-//                    
-//                }else{
-//                    graphics.clear();
-//                }
+           
+//              for(var i = 0; i < arr_touched_tiles.length; i++){
+//                  arr_touched_tiles[i].alpha = 0.0;
+//                  arr_touched_tiles[i].rotation = 40;
+//              } 
+              
+            }
+            
+            function render(){
+              for(var i = 0; i < arr_touched_tiles.length; i++){
+                  arr_touched_tiles[i].alpha = 0.0;
+                  arr_touched_tiles[i].rotation = 40;
+              }
+              if(arr_touched_tiles.length > 0){
+                  arr_touched_tiles.splice(0, arr_touched_tiles.length);
+              }
             }
             
         </script>

@@ -1,0 +1,13 @@
+Resize and Upload buttons for main game screen.
+
+    Recall
+    Swap
+    Pass 
+    Play
+    
+    More
+    
+    Friends
+    Chat
+    
+    
